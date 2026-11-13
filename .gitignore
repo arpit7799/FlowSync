@@ -1,0 +1,60 @@
+# Python virtual environments
+flowsync_env/
+.venv/
+venv/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# Database files
+*.db
+*.sqlite3
+
+# AI model weights and generated artifacts
+*.pt
+*.pth
+*.onnx
+*.engine
+models/weights/
+
+# SUMO generated files
+*.net.xml
+*.rou.xml
+*.trip.xml
+*.fcd.xml
+*.log.xml
+*.sqlite
+
+# Frontend
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Docker
+*.pid
+
+# Operating system and editors
+.DS_Store
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+temp/

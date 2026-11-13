@@ -1,0 +1,35 @@
+# Backend
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+python-multipart
+
+# Database
+sqlalchemy
+psycopg[binary]
+alembic
+
+# MQTT
+paho-mqtt
+
+# Computer Vision
+opencv-python
+
+# Numerical Computing
+numpy
+pandas
+scipy
+
+# AI
+ultralytics
+onnx
+onnxruntime
+
+# SUMO
+traci
+
+# Utilities
+python-dotenv
+PyYAML
+httpx
