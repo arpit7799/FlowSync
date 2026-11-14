@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5" maxSpeed="13.89"/>
+    <route id="straight" edges="west_in east_out"/>
+    <flow id="test_traffic" type="car" route="straight" begin="0" end="100" period="2"/>
+</routes>

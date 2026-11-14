@@ -1,0 +1,8 @@
+{
+    "scenario": "medium",
+    "vehicles_inserted": 150,
+    "vehicles_arrived": 150,
+    "vehicles_remaining": 0,
+    "peak_intersection_queue": 4,
+    "average_intersection_queue": 0.183
+}

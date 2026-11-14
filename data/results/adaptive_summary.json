@@ -1,0 +1,32 @@
+[
+    {
+        "scenario": "low",
+        "vehicles_inserted": 50,
+        "vehicles_arrived": 50,
+        "vehicles_remaining": 0,
+        "intersections_controlled": 4,
+        "decision_count": 104,
+        "metrics_records": 2640,
+        "adaptive_peak_queue": 3
+    },
+    {
+        "scenario": "medium",
+        "vehicles_inserted": 150,
+        "vehicles_arrived": 150,
+        "vehicles_remaining": 0,
+        "intersections_controlled": 4,
+        "decision_count": 71,
+        "metrics_records": 3048,
+        "adaptive_peak_queue": 9
+    },
+    {
+        "scenario": "heavy",
+        "vehicles_inserted": 300,
+        "vehicles_arrived": 300,
+        "vehicles_remaining": 0,
+        "intersections_controlled": 4,
+        "decision_count": 73,
+        "metrics_records": 3400,
+        "adaptive_peak_queue": 17
+    }
+]

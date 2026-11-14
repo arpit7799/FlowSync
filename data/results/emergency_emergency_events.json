@@ -1,0 +1,58 @@
+[
+    {
+        "event_id": "emg_J1_ambulance_01_94_796e66",
+        "vehicle_id": "ambulance_01",
+        "vehicle_type": "ambulance",
+        "junction": "J1",
+        "incoming_edge": "N_J1",
+        "requested_phase": 0,
+        "request_time": 94.0,
+        "granted_time": 94.0,
+        "cleared_time": 112.0,
+        "response_time": 0.0,
+        "status": "cleared",
+        "notes": "Cleared: vehicle_passed"
+    },
+    {
+        "event_id": "emg_J2_ambulance_01_130_3be04b",
+        "vehicle_id": "ambulance_01",
+        "vehicle_type": "ambulance",
+        "junction": "J2",
+        "incoming_edge": "J1_J2",
+        "requested_phase": 0,
+        "request_time": 130.0,
+        "granted_time": 130.0,
+        "cleared_time": 149.0,
+        "response_time": 0.0,
+        "status": "cleared",
+        "notes": "Cleared: vehicle_passed"
+    },
+    {
+        "event_id": "emg_J3_ambulance_02_239_b78ab3",
+        "vehicle_id": "ambulance_02",
+        "vehicle_type": "ambulance",
+        "junction": "J3",
+        "incoming_edge": "W_J3",
+        "requested_phase": 0,
+        "request_time": 239.0,
+        "granted_time": 243.0,
+        "cleared_time": 257.0,
+        "response_time": 4.0,
+        "status": "cleared",
+        "notes": "Cleared: vehicle_passed"
+    },
+    {
+        "event_id": "emg_J4_ambulance_02_276_fdb017",
+        "vehicle_id": "ambulance_02",
+        "vehicle_type": "ambulance",
+        "junction": "J4",
+        "incoming_edge": "J3_J4",
+        "requested_phase": 0,
+        "request_time": 276.0,
+        "granted_time": 280.0,
+        "cleared_time": 294.0,
+        "response_time": 4.0,
+        "status": "cleared",
+        "notes": "Cleared: vehicle_passed"
+    }
+]

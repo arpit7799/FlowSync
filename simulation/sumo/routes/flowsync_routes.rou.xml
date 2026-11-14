@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <!-- North-South and South-North -->
+    <route id="north_to_south" edges="N_J1 J1_J2 J2_S"/>
+    <route id="south_to_north" edges="S_J2 J2_J1 J1_N"/>
+
+    <!-- West-East and East-West -->
+    <route id="west_to_east" edges="W_J3 J3_J4 J4_E"/>
+    <route id="east_to_west" edges="E_J4 J4_J3 J3_W"/>
+
+    <!-- Cross-grid routes -->
+    <route id="north_to_west" edges="N_J1 J1_J3 J3_W"/>
+    <route id="north_to_east" edges="N_J1 J1_J2 J2_J4 J4_E"/>
+    <route id="south_to_west" edges="S_J2 J2_J4 J4_J3 J3_W"/>
+    <route id="south_to_east" edges="S_J2 J2_J4 J4_E"/>
+    <route id="west_to_north" edges="W_J3 J3_J1 J1_N"/>
+    <route id="east_to_south" edges="E_J4 J4_J2 J2_S"/>
+</routes>

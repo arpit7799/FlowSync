@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-11-14T11:25:03.324056+05:30 by Eclipse SUMO sumo 1.28.0
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="/Users/arpit_7799/Documents/Projects/FlowSync/simulation/sumo/config/../network/flowsync.net.xml"/>
+        <route-files value="/Users/arpit_7799/Documents/Projects/FlowSync/simulation/sumo/config/../scenarios/emergency.rou.xml"/>
+    </input>
+
+    <output>
+        <tripinfo-output value="/Users/arpit_7799/Documents/Projects/FlowSync/data/results/demo_tripinfo.xml"/>
+    </output>
+
+    <time>
+        <begin value="0"/>
+        <end value="900"/>
+    </time>
+
+    <processing>
+        <time-to-teleport value="-1"/>
+    </processing>
+
+    <report>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="51407"/>
+    </traci_server>
+
+</sumoConfiguration>
+-->
+
+<tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
+    <tripinfo id="emg_bg_00000" depart="0.00" departLane="N_J1_0" departPos="5.10" departSpeed="13.89" departDelay="0.00" arrival="113.00" arrivalLane="J2_S_0" arrivalPos="489.60" arrivalSpeed="13.61" duration="113.00" routeLength="1494.90" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="5.15" rerouteNo="0" devices="tripinfo_emg_bg_00000" vType="car" speedFactor="1.06" vaporized=""/>
+    <tripinfo id="emg_bg_00015" depart="0.00" departLane="E_J4_0" departPos="5.10" departSpeed="13.89" departDelay="0.00" arrival="113.00" arrivalLane="J3_W_0" arrivalPos="489.60" arrivalSpeed="13.10" duration="113.00" routeLength="1494.90" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="5.20" rerouteNo="0" devices="tripinfo_emg_bg_00015" vType="car" speedFactor="1.08" vaporized=""/>
+    <tripinfo id="emg_bg_00020" depart="2.00" departLane="N_J1_0" departPos="5.10" departSpeed="13.89" departDelay="2.00" arrival="120.00" arrivalLane="J3_W_0" arrivalPos="489.60" arrivalSpeed="13.69" duration="118.00" routeLength="1471.36" waitingTime="1.00" waitingCount="1" stopTime="0.00" timeLoss="10.49" rerouteNo="0" devices="tripinfo_emg_bg_00020" vType="car" speedFactor="1.03" vaporized=""/>
+    <tripinfo id="emg_bg_00005" depart="0.00" departLane="S_J2_0" departPos="5.10" departSpeed="13.03" departDelay="0.00" arrival="121.00" arrivalLane="J1_N_0" arrivalPos="489.60" arrivalSpeed="11.87" duration="121.00" routeLength="1494.90" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="5.64" rerouteNo="0" devices="tripinfo_emg_bg_00005" vType="car" speedFactor="0.94" vaporized=""/>
+    <tripinfo id="emg_bg_00035" depart="1.00" departLane="S_J2_1" departPos="2.30" departSpeed="12.31" departDelay="1.00" arrival="136.00" arrivalLane="J4_E_0" arrivalPos="489.60" arrivalSpeed="11.02" duration="135.00" routeLength="1494.80" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="11.27" rerouteNo="0" devices="tripinfo_emg_bg_00035" vType="motorcycle" speedFactor="0.89" vaporized=""/>
+    <tripinfo id="emg_bg_00010" depart="0.00" departLane="W_J3_0" departPos="5.10" departSpeed="13.89" departDelay="0.00" arrival="140.00" arrivalLane="J4_E_0" arrivalPos="489.60" arrivalSpeed="12.92" duration="140.00" routeLength="1494.90" waitingTime="22.00" waitingCount="1" stopTime="0.00" timeLoss="31.80" rerouteNo="0" devices="tripinfo_emg_bg_00010" vType="car" speedFactor="1.01" vaporized=""/>
+    <tripinfo id="emg_bg_00045" depart="2.00" departLane="E_J4_0" departPos="12.10" departSpeed="11.11" departDelay="2.00" arrival="141.00" arrivalLane="J2_S_0" arrivalPos="489.60" arrivalSpeed="11.02" duration="139.00" routeLength="1464.36" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="6.25" rerouteNo="0" devices="tripinfo_emg_bg_00045" vType="bus" speedFactor="1.00" vaporized=""/>
+    <tripinfo id="emg_bg_00030" depart="0.00" departLane="S_J2_1" departPos="5.10" departSpeed="13.89" departDelay="0.00" arrival="156.00" arrivalLane="J3_W_0" arrivalPos="489.60" arrivalSpeed="13.37" duration="156.00" routeLength="1981.68" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="11.24" rerouteNo="0" devices="tripinfo_emg_bg_00030" vType="car" speedFactor="1.05" vaporized=""/>
+    <tripinfo id="emg_bg_00040" depart="0.00" departLane="W_J3_1" departPos="2.30" departSpeed="13.03" departDelay="0.00" arrival="160.00" arrivalLane="J1_N_0" arrivalPos="489.60" arrivalSpeed="12.10" duration="160.00" routeLength="1494.80" waitingTime="31.00" waitingCount="1" stopTime="0.00" timeLoss="43.34" rerouteNo="0" devices="tripinfo_emg_bg_00040" vType="motorcycle" speedFactor="0.94" vaporized=""/>
+</tripinfos>

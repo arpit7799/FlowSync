@@ -1,0 +1,140 @@
+{
+    "generated_at": "benchmark_comparison",
+    "scenarios": {
+        "low": {
+            "baseline": {
+                "summary": {
+                    "scenario": "low",
+                    "vehicles_inserted": 50,
+                    "vehicles_arrived": 50,
+                    "vehicles_remaining": 0,
+                    "peak_intersection_queue": 2,
+                    "average_intersection_queue": 0.049
+                },
+                "tripinfo": {
+                    "total_vehicles": 50,
+                    "avg_waiting_time": 2.5,
+                    "avg_duration": 138.32,
+                    "avg_time_loss": 15.03,
+                    "total_time_loss": 751.34,
+                    "max_waiting_time": 11.0
+                },
+                "queue_stats": {
+                    "avg_queue": 0.049,
+                    "peak_queue": 2,
+                    "records": 2568
+                }
+            },
+            "adaptive": {
+                "tripinfo": {
+                    "total_vehicles": 50,
+                    "avg_waiting_time": 9.02,
+                    "avg_duration": 144.48,
+                    "avg_time_loss": 21.18,
+                    "total_time_loss": 1058.77,
+                    "max_waiting_time": 47.0
+                },
+                "queue_stats": {
+                    "avg_queue": 0.156,
+                    "peak_queue": 3,
+                    "records": 2640
+                }
+            },
+            "comparison": {
+                "waiting_time_change_pct": 260.8,
+                "time_loss_change_pct": 40.9,
+                "duration_change_pct": 4.5
+            }
+        },
+        "medium": {
+            "baseline": {
+                "summary": {
+                    "scenario": "medium",
+                    "vehicles_inserted": 150,
+                    "vehicles_arrived": 150,
+                    "vehicles_remaining": 0,
+                    "peak_intersection_queue": 4,
+                    "average_intersection_queue": 0.183
+                },
+                "tripinfo": {
+                    "total_vehicles": 150,
+                    "avg_waiting_time": 3.73,
+                    "avg_duration": 138.97,
+                    "avg_time_loss": 16.94,
+                    "total_time_loss": 2540.59,
+                    "max_waiting_time": 26.0
+                },
+                "queue_stats": {
+                    "avg_queue": 0.183,
+                    "peak_queue": 4,
+                    "records": 2944
+                }
+            },
+            "adaptive": {
+                "tripinfo": {
+                    "total_vehicles": 150,
+                    "avg_waiting_time": 26.75,
+                    "avg_duration": 162.56,
+                    "avg_time_loss": 40.53,
+                    "total_time_loss": 6079.36,
+                    "max_waiting_time": 120.0
+                },
+                "queue_stats": {
+                    "avg_queue": 1.169,
+                    "peak_queue": 9,
+                    "records": 3048
+                }
+            },
+            "comparison": {
+                "waiting_time_change_pct": 617.2,
+                "time_loss_change_pct": 139.3,
+                "duration_change_pct": 17.0
+            }
+        },
+        "heavy": {
+            "baseline": {
+                "summary": {
+                    "scenario": "heavy",
+                    "vehicles_inserted": 300,
+                    "vehicles_arrived": 300,
+                    "vehicles_remaining": 0,
+                    "peak_intersection_queue": 4,
+                    "average_intersection_queue": 0.33
+                },
+                "tripinfo": {
+                    "total_vehicles": 300,
+                    "avg_waiting_time": 3.63,
+                    "avg_duration": 139.4,
+                    "avg_time_loss": 16.79,
+                    "total_time_loss": 5037.94,
+                    "max_waiting_time": 16.0
+                },
+                "queue_stats": {
+                    "avg_queue": 0.33,
+                    "peak_queue": 4,
+                    "records": 3124
+                }
+            },
+            "adaptive": {
+                "tripinfo": {
+                    "total_vehicles": 300,
+                    "avg_waiting_time": 34.17,
+                    "avg_duration": 174.18,
+                    "avg_time_loss": 51.56,
+                    "total_time_loss": 15468.76,
+                    "max_waiting_time": 119.0
+                },
+                "queue_stats": {
+                    "avg_queue": 2.573,
+                    "peak_queue": 17,
+                    "records": 3400
+                }
+            },
+            "comparison": {
+                "waiting_time_change_pct": 841.3,
+                "time_loss_change_pct": 207.1,
+                "duration_change_pct": 24.9
+            }
+        }
+    }
+}

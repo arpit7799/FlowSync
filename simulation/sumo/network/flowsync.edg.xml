@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edges>
+    <!-- Northern boundary -->
+    <edge id="N_J1" from="N" to="J1" numLanes="2" speed="13.89"/>
+    <edge id="J1_N" from="J1" to="N" numLanes="2" speed="13.89"/>
+
+    <!-- Southern boundary -->
+    <edge id="W_J3" from="W" to="J3" numLanes="2" speed="13.89"/>
+    <edge id="J3_W" from="J3" to="W" numLanes="2" speed="13.89"/>
+
+    <!-- Eastern and western horizontal connections -->
+    <edge id="J1_J2" from="J1" to="J2" numLanes="2" speed="13.89"/>
+    <edge id="J2_J1" from="J2" to="J1" numLanes="2" speed="13.89"/>
+    <edge id="J3_J4" from="J3" to="J4" numLanes="2" speed="13.89"/>
+    <edge id="J4_J3" from="J4" to="J3" numLanes="2" speed="13.89"/>
+
+    <!-- Vertical connections between intersections -->
+    <edge id="J1_J3" from="J1" to="J3" numLanes="2" speed="13.89"/>
+    <edge id="J3_J1" from="J3" to="J1" numLanes="2" speed="13.89"/>
+    <edge id="J2_J4" from="J2" to="J4" numLanes="2" speed="13.89"/>
+    <edge id="J4_J2" from="J4" to="J2" numLanes="2" speed="13.89"/>
+
+    <!-- Outer connections -->
+    <edge id="J2_S" from="J2" to="S" numLanes="2" speed="13.89"/>
+    <edge id="S_J2" from="S" to="J2" numLanes="2" speed="13.89"/>
+    <edge id="J4_E" from="J4" to="E" numLanes="2" speed="13.89"/>
+    <edge id="E_J4" from="E" to="J4" numLanes="2" speed="13.89"/>
+</edges>

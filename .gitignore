@@ -32,13 +32,16 @@ logs/
 *.engine
 models/weights/
 
-# SUMO generated files
-*.net.xml
-*.rou.xml
+# SUMO simulation files (allow essential network and route definitions)
 *.trip.xml
 *.fcd.xml
 *.log.xml
 *.sqlite
+!simulation/sumo/network/*.net.xml
+!simulation/sumo/routes/*.rou.xml
+!simulation/sumo/scenarios/*.rou.xml
+!simulation/sumo/test/*.net.xml
+!simulation/sumo/test/*.rou.xml
 
 # Frontend
 node_modules/
