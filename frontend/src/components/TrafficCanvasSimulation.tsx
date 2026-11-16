@@ -284,6 +284,11 @@ export const TrafficCanvasSimulation: React.FC = () => {
     setTotalVehicles(vehiclesRef.current.length);
 
     if (isAmbulance) {
+      const ambCount = vehiclesRef.current.filter((veh) => veh.type === "ambulance").length;
+      setActiveAmbulances(ambCount);
+      if (soundEnabled) {
+        startSirenSound();
+      }
       addLog(
         chosenRoute[1]?.junction || "Grid",
         "emergency",
@@ -300,39 +305,36 @@ export const TrafficCanvasSimulation: React.FC = () => {
     addLog("System", "adaptive", "Autonomous IoT Adaptive Signal Engine & Sensor Telemetry Initialized.");
   }, []);
 
-  // Web Audio Synthesizer for Emergency Siren
-  useEffect(() => {
-    const stopSiren = () => {
-      try {
-        if (oscRef.current) {
-          oscRef.current.stop();
-          oscRef.current.disconnect();
-          oscRef.current = null;
-        }
-        if (lfoRef.current) {
-          lfoRef.current.stop();
-          lfoRef.current.disconnect();
-          lfoRef.current = null;
-        }
-      } catch (e) {}
-    };
+  const stopSirenSound = () => {
+    try {
+      if (oscRef.current) {
+        oscRef.current.stop();
+        oscRef.current.disconnect();
+        oscRef.current = null;
+      }
+      if (lfoRef.current) {
+        lfoRef.current.stop();
+        lfoRef.current.disconnect();
+        lfoRef.current = null;
+      }
+    } catch (e) {}
+  };
 
-    if (!soundEnabled || activeAmbulances === 0) {
-      stopSiren();
-      return;
-    }
-
+  const startSirenSound = () => {
     try {
       const ctx = ensureAudioContext();
       if (!ctx) return;
 
-      stopSiren();
+      // Don't recreate if already sounding
+      if (oscRef.current && lfoRef.current) return;
+
+      stopSirenSound();
 
       // Main siren carrier oscillator
       const osc = ctx.createOscillator();
       const masterGain = ctx.createGain();
 
-      // Low Frequency Oscillator (LFO) for smooth, continuous emergency wail
+      // Low Frequency Oscillator (LFO) for authentic continuous emergency wail
       const lfo = ctx.createOscillator();
       const lfoGain = ctx.createGain();
 
@@ -340,14 +342,14 @@ export const TrafficCanvasSimulation: React.FC = () => {
       osc.frequency.setValueAtTime(800, ctx.currentTime);
 
       lfo.type = "sine";
-      lfo.frequency.setValueAtTime(1.3, ctx.currentTime); // 1.3 Hz wail cycles
+      lfo.frequency.setValueAtTime(1.4, ctx.currentTime); // 1.4 Hz wail frequency
 
       lfoGain.gain.setValueAtTime(260, ctx.currentTime); // Modulate pitch from 540 Hz to 1060 Hz
       lfo.connect(lfoGain);
       lfoGain.connect(osc.frequency);
 
       // Audible clear volume
-      masterGain.gain.setValueAtTime(0.20, ctx.currentTime);
+      masterGain.gain.setValueAtTime(0.25, ctx.currentTime);
       osc.connect(masterGain);
       masterGain.connect(ctx.destination);
 
@@ -358,11 +360,20 @@ export const TrafficCanvasSimulation: React.FC = () => {
       lfoRef.current = lfo;
       gainRef.current = masterGain;
     } catch (err) {
-      console.warn("Audio init warning:", err);
+      console.warn("Audio start error:", err);
+    }
+  };
+
+  // Web Audio Synthesizer for Emergency Siren
+  useEffect(() => {
+    if (!soundEnabled || activeAmbulances === 0) {
+      stopSirenSound();
+    } else if (soundEnabled && activeAmbulances > 0) {
+      startSirenSound();
     }
 
     return () => {
-      stopSiren();
+      stopSirenSound();
     };
   }, [soundEnabled, activeAmbulances]);
 
@@ -995,8 +1006,16 @@ export const TrafficCanvasSimulation: React.FC = () => {
             v.routeIdx++;
             if (v.routeIdx >= v.route.length) {
               // Completed route, remove vehicle
+              const wasAmbulance = v.type === "ambulance";
               vehicles.splice(i, 1);
               setTotalVehicles(vehicles.length);
+              if (wasAmbulance) {
+                const remAmbulances = vehicles.filter((veh) => veh.type === "ambulance").length;
+                setActiveAmbulances(remAmbulances);
+                if (remAmbulances === 0) {
+                  stopSirenSound();
+                }
+              }
               continue;
             }
             v.targetX = v.route[v.routeIdx].x;
@@ -1202,7 +1221,20 @@ export const TrafficCanvasSimulation: React.FC = () => {
           <button
             onClick={() => {
               ensureAudioContext();
-              setSoundEnabled(!soundEnabled);
+              const next = !soundEnabled;
+              setSoundEnabled(next);
+              if (next) {
+                startSirenSound();
+                if (vehiclesRef.current.filter((veh) => veh.type === "ambulance").length === 0) {
+                  setTimeout(() => {
+                    if (vehiclesRef.current.filter((veh) => veh.type === "ambulance").length === 0) {
+                      stopSirenSound();
+                    }
+                  }, 2500);
+                }
+              } else {
+                stopSirenSound();
+              }
             }}
             className={`px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition ${
               soundEnabled
