@@ -76,7 +76,7 @@ export const TrafficCanvasSimulation: React.FC = () => {
   const [autoSpawn, setAutoSpawn] = useState<boolean>(true);
   const [zeroWaitGreen, setZeroWaitGreen] = useState<boolean>(true);
   const [showSensorRadar, setShowSensorRadar] = useState<boolean>(true);
-  const [soundEnabled, setSoundEnabled] = useState<boolean>(false);
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [activeAmbulances, setActiveAmbulances] = useState<number>(0);
   const [totalVehicles, setTotalVehicles] = useState<number>(0);
   const [selectedJunction, setSelectedJunction] = useState<string>("J1");
@@ -85,7 +85,23 @@ export const TrafficCanvasSimulation: React.FC = () => {
   // Audio Context for Siren
   const audioCtxRef = useRef<AudioContext | null>(null);
   const oscRef = useRef<OscillatorNode | null>(null);
+  const lfoRef = useRef<OscillatorNode | null>(null);
   const gainRef = useRef<GainNode | null>(null);
+
+  const ensureAudioContext = () => {
+    try {
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      if (audioCtxRef.current.state === "suspended") {
+        audioCtxRef.current.resume();
+      }
+      return audioCtxRef.current;
+    } catch (e) {
+      console.warn("AudioContext error:", e);
+      return null;
+    }
+  };
 
   // Junction centers in canvas coordinate space (W=1000, H=580)
   const J1 = { x: 300, y: 180 };
@@ -286,58 +302,67 @@ export const TrafficCanvasSimulation: React.FC = () => {
 
   // Web Audio Synthesizer for Emergency Siren
   useEffect(() => {
-    if (!soundEnabled || activeAmbulances === 0) {
-      if (oscRef.current) {
-        try {
+    const stopSiren = () => {
+      try {
+        if (oscRef.current) {
           oscRef.current.stop();
           oscRef.current.disconnect();
-        } catch (e) {}
-        oscRef.current = null;
-      }
+          oscRef.current = null;
+        }
+        if (lfoRef.current) {
+          lfoRef.current.stop();
+          lfoRef.current.disconnect();
+          lfoRef.current = null;
+        }
+      } catch (e) {}
+    };
+
+    if (!soundEnabled || activeAmbulances === 0) {
+      stopSiren();
       return;
     }
 
     try {
-      if (!audioCtxRef.current) {
-        audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-      }
-      const ctx = audioCtxRef.current;
-      if (ctx.state === "suspended") {
-        ctx.resume();
-      }
+      const ctx = ensureAudioContext();
+      if (!ctx) return;
 
+      stopSiren();
+
+      // Main siren carrier oscillator
       const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
+      const masterGain = ctx.createGain();
+
+      // Low Frequency Oscillator (LFO) for smooth, continuous emergency wail
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
 
       osc.type = "sawtooth";
-      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
 
-      // Wail effect
-      const now = ctx.currentTime;
-      for (let i = 0; i < 30; i++) {
-        osc.frequency.setValueAtTime(650, now + i * 1.2);
-        osc.frequency.linearRampToValueAtTime(950, now + i * 1.2 + 0.6);
-        osc.frequency.linearRampToValueAtTime(650, now + i * 1.2 + 1.2);
-      }
+      lfo.type = "sine";
+      lfo.frequency.setValueAtTime(1.3, ctx.currentTime); // 1.3 Hz wail cycles
 
-      osc.connect(gain);
-      gain.connect(ctx.destination);
+      lfoGain.gain.setValueAtTime(260, ctx.currentTime); // Modulate pitch from 540 Hz to 1060 Hz
+      lfo.connect(lfoGain);
+      lfoGain.connect(osc.frequency);
+
+      // Audible clear volume
+      masterGain.gain.setValueAtTime(0.20, ctx.currentTime);
+      osc.connect(masterGain);
+      masterGain.connect(ctx.destination);
+
       osc.start();
+      lfo.start();
 
       oscRef.current = osc;
-      gainRef.current = gain;
+      lfoRef.current = lfo;
+      gainRef.current = masterGain;
     } catch (err) {
       console.warn("Audio init warning:", err);
     }
 
     return () => {
-      if (oscRef.current) {
-        try {
-          oscRef.current.stop();
-          oscRef.current.disconnect();
-        } catch (e) {}
-        oscRef.current = null;
-      }
+      stopSiren();
     };
   }, [soundEnabled, activeAmbulances]);
 
@@ -1175,7 +1200,10 @@ export const TrafficCanvasSimulation: React.FC = () => {
 
           {/* Toggle Siren Audio */}
           <button
-            onClick={() => setSoundEnabled(!soundEnabled)}
+            onClick={() => {
+              ensureAudioContext();
+              setSoundEnabled(!soundEnabled);
+            }}
             className={`px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition ${
               soundEnabled
                 ? "bg-red-500/20 border-red-500/50 text-red-300"
@@ -1183,7 +1211,7 @@ export const TrafficCanvasSimulation: React.FC = () => {
             }`}
           >
             {soundEnabled ? <Volume2 className="h-3.5 w-3.5 text-red-400" /> : <VolumeX className="h-3.5 w-3.5" />}
-            Siren Sound
+            Siren Sound: {soundEnabled ? "ON" : "OFF"}
           </button>
 
           {/* Zero-Wait Clean Road Toggle */}
@@ -1226,7 +1254,11 @@ export const TrafficCanvasSimulation: React.FC = () => {
 
           {/* DISPATCH AMBULANCE BUTTON */}
           <button
-            onClick={() => spawnVehicle("ambulance", Math.random() > 0.5 ? 0 : 2)}
+            onClick={() => {
+              ensureAudioContext();
+              setSoundEnabled(true);
+              spawnVehicle("ambulance", Math.random() > 0.5 ? 0 : 2);
+            }}
             className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-bold flex items-center gap-1.5 transition shadow-lg shadow-red-600/30 animate-pulse"
           >
             <ShieldAlert className="h-4 w-4 text-white" />
