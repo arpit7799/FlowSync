@@ -1,0 +1,7 @@
+scenario,controller_type,controller_display,runs_count,total_vehicles,arrived_mean,arrival_rate_pct,wait_mean,wait_std,wait_min,wait_max,queue_mean,queue_std,queue_min,queue_max,travel_mean,travel_std,travel_min,travel_max,loss_mean,loss_std,loss_min,loss_max
+low,baseline_actuated,SUMO Actuated (Baseline),40,50,50.0,100.0,2.984,0.452,1.92,4.02,0.226,0.033,0.144,0.295,138.673,1.836,135.84,142.88,15.91,0.899,14.09,18.055
+low,adaptive_rule_based,FlowSync Adaptive (Rule-Based),40,50,50.0,100.0,12.729,5.06,6.92,29.26,0.923,0.343,0.53,2.095,147.868,5.908,138.94,165.54,25.115,5.679,17.991,43.301
+medium,baseline_actuated,SUMO Actuated (Baseline),40,150,150.0,100.0,3.242,0.264,2.747,3.88,0.623,0.051,0.527,0.752,139.086,1.038,136.953,141.227,16.232,0.5,15.309,17.268
+medium,adaptive_rule_based,FlowSync Adaptive (Rule-Based),40,150,150.0,100.0,29.932,3.259,22.753,36.673,5.529,0.58,4.241,6.928,167.321,3.558,157.98,173.08,44.439,3.513,36.251,51.801
+heavy,baseline_actuated,SUMO Actuated (Baseline),40,300,300.0,100.0,3.583,0.411,2.887,4.537,1.317,0.146,1.049,1.67,139.768,1.098,137.277,142.097,16.813,0.765,15.512,18.655
+heavy,adaptive_rule_based,FlowSync Adaptive (Rule-Based),40,300,300.0,100.0,34.868,3.872,28.91,45.2,12.364,1.305,10.365,15.736,175.021,4.283,169.24,186.423,52.015,4.194,45.827,63.415
